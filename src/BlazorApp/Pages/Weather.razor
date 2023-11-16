@@ -5,7 +5,7 @@
 
 <h1>Weather</h1>
 
-<p>This component demonstrates showing data from the server.</p>
+<p>This component demonstrates streaming data from the server, no websocket connection.</p>
 
 @if (forecasts == null)
 {
@@ -49,7 +49,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-    // Simulate retrieving the data asynchronously.
+        // Simulate retrieving the data asynchronously.
         await Task.Delay(1000);
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);

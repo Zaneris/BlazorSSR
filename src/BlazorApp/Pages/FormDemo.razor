@@ -1,0 +1,31 @@
+@page "/FormDemo"
+@inject ILogger<FormDemo> Logger
+
+<PageTitle>Form Demo</PageTitle>
+
+<h1>Form Demo</h1>
+<p>This doesn't use WASM or websockets. Watch .NET IDE console.</p>
+
+<EditForm Enhance FormName="FormDemo" Model="FormMeals" OnSubmit="OnFormSubmission">
+    <p>Breakfast: <InputText @bind-Value="@FormMeals.Breakfast"></InputText></p>
+    <p>Lunch: <InputText @bind-Value="@FormMeals.Lunch"></InputText></p>
+    <p>Dinner: <InputText @bind-Value="@FormMeals.Dinner"></InputText></p>
+    <button>Submit</button>
+</EditForm>
+
+@code {
+    public record Meals
+    {
+        public string Breakfast { get; set; } = "";
+        public string Lunch { get; set; } = "";
+        public string Dinner { get; set; } = "";
+    }
+
+    [SupplyParameterFromForm]
+    public Meals FormMeals { get; set; } = new();
+
+    private void OnFormSubmission()
+    {
+        Logger.LogInformation("Meals entered: {Meals}", FormMeals);
+    }
+}
